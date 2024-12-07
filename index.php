@@ -1,17 +1,17 @@
 <?php
-
-session_start();
+session_start(); // Запускаем сессию вообщем да
 require 'config.php';
 
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $limit = 5; // Количество постов на странице
 $offset = ($page - 1) * $limit;
 
-// Получение постов из базы данных
+// Получение постов из базы данных, все безопастно все чики пуки
 $stmt = $pdo->prepare("SELECT * FROM posts ORDER BY created_at DESC LIMIT :limit OFFSET :offset");
 $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
 $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
 $stmt->execute();
+
 $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 

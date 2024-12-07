@@ -1,13 +1,10 @@
 <?php
-
-
 session_set_cookie_params([
     'lifetime' => 3600,
-    'secure' => true, // Только HTTPS
-    'httponly' => true, // Закрывает доступ из JS
-    'samesite' => 'Strict', // Защита от CSRF
-]);
-session_start();
+    'secure' => true,
+    'httponly' => true, 
+    'samesite' => 'Strict',
+]); session_start();
 
 require 'config.php';
 
@@ -15,13 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
 
     if (password_verify($password, ADMIN_PASSWORD_HASH)) {
-        session_regenerate_id(true); // Предотвращает угон сессии
+        session_regenerate_id(true); // Предотвращает угон(машини) сессии
         $_SESSION['admin_logged_in'] = true;
         header('Location: admin.php');
-        exit;
-    } else {
-        $error = 'Неверный пароль!';
-    }
+        exit; // екзит фром виндов плиз
+    } else { $error = 'Неверный пароль!'; } // Эту строку удаляем сразу
 }
 ?>
 
