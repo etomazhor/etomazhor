@@ -1,6 +1,6 @@
 <?php
 session_start(); // Запускаем сессию вообщем да
-require 'config.php';
+include 'config/config.php';
 
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $limit = 5; // Количество постов на странице
@@ -20,35 +20,38 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная страница</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
-        .post { border-bottom: 1px solid #ddd; margin-bottom: 20px; padding-bottom: 10px; }
-        #loadMore { cursor: pointer; color: blue; text-align: center; }
-    </style>
+    <title>МажорныеОбстоятельства Турниры КС:С</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="mazhor.styles.css">
 </head>
 <body>
-    <h1>Посты</h1>
-    <div id="posts">
-        <?php foreach ($posts as $post): ?>
-            <div class="post">
-                <h2><?= htmlspecialchars($post['header']) ?></h2>
-                <p><?= nl2br(htmlspecialchars($post['content'])) ?></p>
-                <small>Опубликовано: <?= htmlspecialchars($post['created_at']) ?></small>
-            </div>
-        <?php endforeach; ?>
+    <div class="main_container">
+        <div class="container">
+            <h1 class="container_header">What is 4chan?</h1>
+            <p class="container_content">4chan is a simple image-based bulletin board where anyone can post comments and share images. There are boards dedicated to a variety of topics, from Japanese animation and culture to videogames, music, and photography. Users do not need to register an account before participating in the community. Feel free to click on a board below that interests you and jump right in!</p>
+        </div>
+
+        <div id="posts" class="container_divider">
+            <?php foreach ($posts as $post): ?>
+                <div class="container">
+                    <h1 class="container_header subheader"><?= htmlspecialchars($post['header']) ?></h1>
+                    <p class="container_content"><?= nl2br(htmlspecialchars($post['content'])) ?></p>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        
+        <div id="load_more" class="load_more">Загрузить еще</div>
     </div>
-    <div id="loadMore">Загрузить еще</div>
 
     <script>
         let page = <?= $page ?>;
-        document.getElementById('loadMore').addEventListener('click', function() {
+        document.getElementById('load_more').addEventListener('click', function() {
             page++;
             fetch(`load_posts.php?page=${page}`)
                 .then(response => response.text())
                 .then(data => {
                     if (data.trim() === '') {
-                        document.getElementById('loadMore').innerText = 'Больше постов нет';
+                        document.getElementById('load_more').innerText = 'Больше постов нет';
                         return;
                     }
                     document.getElementById('posts').innerHTML += data;

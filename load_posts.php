@@ -1,5 +1,5 @@
 <?php
-require 'config.php';
+include 'config/config.php';
 
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $limit = 5; $offset = ($page - 1) * $limit;
@@ -13,10 +13,9 @@ $posts = $stmt->fetchAll();
 
 foreach ($posts as $post): // Вставка постов, вот тут их редактировать нужно если что
 ?>
-    <div class="post">
-        <h2><?= secure_input($post['header']) ?></h2>
-        <p><?= nl2br(secure_input($post['content'])) ?></p>
-        <small>Опубликовано: <?= secure_input($post['created_at']) ?></small>
+    <div class="container">
+        <h2 class="container_header subheader"><?= secure_input($post['header']) ?></h2>
+        <p class="container_content"><?= nl2br(secure_input($post['content'])) ?></p>
     </div>
 <?php
 endforeach;

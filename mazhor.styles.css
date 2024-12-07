@@ -1,0 +1,34 @@
+/*html стили ну просто для прикола*/
+* {
+    font-size: 10pt; font-family: arial, helvetica, clean, sans-serif; font-weight: 400;
+    padding: 0px; margin: 0px; border: 0px; outline: 0px; color: #0a0706;
+}html, body {
+    width: 100%; height: 100%; overflow-x: hidden; background-color: #FFF8E7;
+}
+
+
+/*Стили утилиты*/
+.nonselect {
+    user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;
+}
+
+/*Глобальные стили елементов да*/
+.main_container { width: 40%; margin-left: 30%; padding: 8px; }
+
+.container { border: 1px solid #3E2723; margin: 8px 0px; }
+.container_header {
+    padding: 8px; background-color: #F5DEB3;
+    font-size: 12pt; font-weight: 600;
+}.subheader { background-color: #F5DEB3; }
+.container_content { padding: 8px; }
+.container_form {
+    padding: 8px;
+}
+.container_input {
+    background-color: #F5DEB3; margin: 8px; resize: none; width: 320px;
+}
+.container_button {
+    cursor: pointer;
+}
+
+.load_more { text-align: center; }

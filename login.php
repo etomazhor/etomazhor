@@ -6,7 +6,7 @@ session_set_cookie_params([
     'samesite' => 'Strict',
 ]); session_start();
 
-require 'config.php';
+include 'config/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
@@ -25,17 +25,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход администратора</title>
+    <title>А тебе сюда не это</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="mazhor.styles.css">
 </head>
 <body>
-    <h1>Вход администратора</h1>
-    <?php if (isset($error)): ?>
-        <p style="color: red;"><?= secure_input($error) ?></p>
-    <?php endif; ?>
-    <form method="POST">
-        <label for="password">Пароль:</label>
-        <input type="password" name="password" id="password" required>
-        <button type="submit">Войти</button>
-    </form>
+    <div class="main_container">
+        <div class="container">
+            <h1 class="container_header">Вход администратора</h1>
+            <p class="container_content">dasdasd</p>
+            <form method="POST">
+                <label class="container_form" for="password">Пароль:</label><br>
+                <input class="container_input" type="password" name="password" id="password" required><br>
+                <button class="container_button container_input" type="submit">Войти</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
