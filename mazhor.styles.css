@@ -28,5 +28,6 @@
 .container_input { background-color: #F5DEB3; margin: 8px; resize: none; width: 320px; }
 .container_button { cursor: pointer; }
 .container_image { width: 320px; padding: 8px; }
+.comment_content { word-wrap: break-word; }
 
 .load_more { text-align: center; }

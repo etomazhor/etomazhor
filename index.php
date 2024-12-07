@@ -49,10 +49,32 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <?php if (!empty($post['image'])): ?>
                             <img src="<?= secure_input($post['image']) ?>" alt="Изображение поста" class="container_image">
                         <?php endif; ?>
+
+                        <!-- Форма для комментариев -->
+                        <form action="submit_comment.php" method="POST">
+                            <input type="text" class="container_input" name="comment" required></input><br>
+                            <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
+                            <button class="container_input" type="submit">Отправить</button>
+                        </form>
+
+                        <!-- Вывод комментариев -->
+                        <div class="comments_section">
+                            <?php
+                            $stmt = $pdo->prepare("SELECT * FROM comments WHERE post_id = :post_id ORDER BY created_at DESC");
+                            $stmt->bindValue(':post_id', $post['id'], PDO::PARAM_INT);
+                            $stmt->execute();
+                            $comments = $stmt->fetchAll();
+
+                            foreach ($comments as $comment): ?>
+                                <div class="comment">
+                                    <p class="container_form comment_content">>>> <?= secure_input($comment['content']) ?></p>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
-            
+
             <div id="load_more" class="load_more">Загрузить еще</div>
         </div>
 
